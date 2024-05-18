@@ -3,16 +3,16 @@ fetch('https://coding-week-2024-api.onrender.com/api/data').then((response)=>{
     return response.json();
 }).then(data => {
 
-        function change_date(date) {
-            var y =date[0]+date[1]+date[2]+date[3];
-            var m =date[5]+date[6];
-            var d =date[8]+date[9];
-            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            const mInt =parseInt(m);
-            console.log(mInt)
-            const output = months[mInt-1]+" "+d+", "+y;
-            return(output);
-        }
+    function change_date(date) {
+        var y =date[0]+date[1]+date[2]+date[3];
+        var m =date[5]+date[6];
+        var d =date[8]+date[9];
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const mInt =parseInt(m);
+        console.log(mInt)
+        const output = months[mInt-1]+" "+d+", "+y;
+        return(output);
+    }
 
         const style= document.querySelector("style");
         style.innerHTML+=`.part1{background-image: url(${data[5].image})}`;
@@ -92,6 +92,73 @@ fetch('https://coding-week-2024-api.onrender.com/api/data').then((response)=>{
         date6.innerHTML+=`${change_date(data[9].date)}`
 
         const heading=document.querySelector(".heading")
+addEventListener("click",function(e){
+    if (e.target==heading.lastElementChild) {
+        e.target.classList.add("current");
+        e.target.previousElementSibling.classList.remove("current");
+    }
+})
+addEventListener("click",function(e){
+    if (e.target==heading.firstElementChild) {
+        e.target.classList.add("current");
+        e.target.nextElementSibling.classList.remove("current");
+    }
+})
+
+const box = document.querySelector(".box")
+const popup = document.querySelectorAll(".popup")
+const cross = document.querySelector(".cross-logo")
+
+const popup1 = document.querySelector(".popup1")
+const popup2 = document.querySelector(".popup2")
+const popup3 = document.querySelector(".popup3")
+const popup4 = document.querySelector(".popup4")
+
+const boxtitle = document.querySelector(".boxtitle")
+const boxcontent = document.querySelector(".boxcontent")
+addEventListener("click",function(e){
+    popup.forEach(function(value){
+        if (e.target==value) {
+            box.classList.add("box-active")
+            box.classList.remove("box-inactive") 
+        }
+    })
+})
+
+addEventListener("click",function (e){
+    if(e.target==popup1){
+        boxtitle.innerHTML=`${data[5].headline}` 
+        boxcontent.innerHTML=`${data[5].content}`
+    }
+})
+
+addEventListener("click",function (e){
+    if(e.target==popup2){
+        boxtitle.innerHTML=`${data[2].headline}` 
+        boxcontent.innerHTML=`${data[2].content}`
+    }
+})
+
+addEventListener("click",function (e){
+    if(e.target==popup3){
+        boxtitle.innerHTML=`${data[0].headline}` 
+        boxcontent.innerHTML=`${data[0].content}`
+    }
+})
+
+addEventListener("click",function (e){
+    if(e.target==popup4){
+        boxtitle.innerHTML=`${data[6].headline}` 
+        boxcontent.innerHTML=`${data[6].content}`
+    }
+})
+
+addEventListener("click",function(e){
+    if (e.target==cross) {
+        box.classList.remove("box-active")
+        box.classList.add("box-inactive")
+    }
+})
 
 }).catch((err)=>{
     console.log('rejected',err);
