@@ -116,7 +116,6 @@ body{
     margin-top: 20px;
     position: relative;
     background-size: cover;
-    background-position-x: -400px;
     height: 90%;
     border-radius: 7px;
 }
